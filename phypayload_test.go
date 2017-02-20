@@ -90,10 +90,14 @@ func TestPHYPayloadData(t *testing.T) {
 			})
 
 			Convey("Invalid MIC bug test for jack", func() {
-				data := []byte{128, 108, 71, 72, 07, 128, 166, 31, 02, 50, 15, 158, 139, 26, 47, 52, 156, 120, 94, 253, 28, 213, 21, 219, 161}
+				data := []byte{128, 167, 28, 238, 07, 128, 05, 01, 02, 115, 171, 104, 102, 203, 68, 186, 91, 149, 205, 127, 133, 241, 29, 192, 49}
 				var pkt PHYPayload
 				pkt.UnmarshalBinary(data)
+
+				nwkSkey:=[16]{0xde,0x11,0x8f,0x78,0xbb,0x99,0x40,0xb9,0x08,0xa3,0x32,0x95,0x27,0x6a,0xb2,0x0e}
+
 				valid, err := pkt.ValidateMIC(nwkSKey)
+				fmt.Printf("jjjjj valid %v, err %v",valid,err)
 				So(err, ShouldBeNil)
 				So(valid, ShouldBeTrue)
 			})
