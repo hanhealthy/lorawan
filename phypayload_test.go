@@ -97,7 +97,7 @@ func TestPHYPayloadData(t *testing.T) {
 				nwkSKey := [16]byte{0xde, 0x11, 0x8f, 0x78, 0xbb, 0x99, 0x40, 0xb9, 0x08, 0xa3, 0x32, 0x95, 0x27, 0x6a, 0xb2, 0x0e}
 
 				valid, err := pkt.ValidateMIC(nwkSKey)
-				fmt.Printf("jjjjj valid %v, err %v", valid, err)
+				fmt.Printf("jjjj valid %v, err %v", valid, err)
 				So(err, ShouldBeNil)
 				So(valid, ShouldBeTrue)
 			})
