@@ -284,6 +284,7 @@ func (p PHYPayload) ValidateMIC(key AES128Key) (bool, error) {
 		mic, err = p.calculateMIC(key)
 	}
 
+	fmt.Printf("calculated mic %v", mic)
 	if err != nil {
 		return false, err
 	}
