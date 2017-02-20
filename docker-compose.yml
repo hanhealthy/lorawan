@@ -1,0 +1,7 @@
+lorawan:
+  build: .
+  command: make test
+
+  volumes:
+    - ./:/go/src/github.com/brocaar/lorawan
+
