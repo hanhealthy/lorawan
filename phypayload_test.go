@@ -89,6 +89,15 @@ func TestPHYPayloadData(t *testing.T) {
 				So(valid, ShouldBeTrue)
 			})
 
+			Convey("Invalid MIC bug test", func() {
+				data := []byte{128, 108, 71, 72, 07, 128, 166, 31, 02, 50, 15, 158, 139, 26, 47, 52, 156, 120, 94, 253, 28, 213, 21, 219, 161}
+				var pkt PHYPayload
+				pkt.UnmarshalBinary(data)
+				valid, err := pkt.ValidateMIC(nwkSKey)
+				So(err, ShouldBeNil)
+				So(valid, ShouldBeTrue)
+			})
+
 			Convey("Then the MHDR contains the expected data", func() {
 				So(phy.MHDR.MType, ShouldEqual, UnconfirmedDataUp)
 				So(phy.MHDR.Major, ShouldEqual, LoRaWANR1)
