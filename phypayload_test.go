@@ -90,14 +90,16 @@ func TestPHYPayloadData(t *testing.T) {
 			})
 
 			Convey("Invalid MIC bug test for jack", func() {
-				data := []byte{128, 167, 28, 238, 07, 128, 05, 01, 02, 115, 171, 104, 102, 203, 68, 186, 91, 149, 205, 127, 133, 241, 29, 192, 49}
+				//data := []byte{128, 167, 28, 238, 07, 128, 05, 01, 02, 115, 171, 104, 102, 203, 68, 186, 91, 149, 205, 127, 133, 241, 29, 192, 49}
+				data := []byte{128, 103, 154, 36, 07, 128, 217, 00, 02, 251, 161, 167, 142, 140, 42, 203, 175, 12, 46, 126, 248, 29, 10, 88, 191}
 				var pkt PHYPayload
 				pkt.UnmarshalBinary(data)
 
-				nwkSKey := [16]byte{0xde, 0x11, 0x8f, 0x78, 0xbb, 0x99, 0x40, 0xb9, 0x08, 0xa3, 0x32, 0x95, 0x27, 0x6a, 0xb2, 0x0e}
+				//nwkSKey := [16]byte{0xde, 0x11, 0x8f, 0x78, 0xbb, 0x99, 0x40, 0xb9, 0x08, 0xa3, 0x32, 0x95, 0x27, 0x6a, 0xb2, 0x0e}
+				nwkSKey := [16]byte{0xc8, 0x88, 0x49, 0xb8, 0xe7, 0x66, 0xe0, 0x48, 0x9e, 0x6f, 0x5e, 0xe5, 0x0f, 0x8d, 0xb8, 0x59}
 
 				valid, err := pkt.ValidateMIC(nwkSKey)
-				fmt.Printf("jjjj valid %v, err %v", valid, err)
+				fmt.Printf("jjjj valid %v, err %v, phy %v", valid, err, pkt)
 				So(err, ShouldBeNil)
 				So(valid, ShouldBeTrue)
 			})
